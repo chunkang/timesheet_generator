@@ -6,7 +6,19 @@ struct TimesheetGeneratorApp: App {
         WindowGroup {
             ContentView()
         }
+        .commands {
+            CommandGroup(after: .saveItem) {
+                Button("Export Timesheet...") {
+                    NotificationCenter.default.post(name: .exportTimesheet, object: nil)
+                }
+                .keyboardShortcut("e", modifiers: [.command, .shift])
+            }
+        }
     }
+}
+
+extension Notification.Name {
+    static let exportTimesheet = Notification.Name("exportTimesheet")
 }
 
 struct ContentView: View {
@@ -22,13 +34,16 @@ struct ContentView: View {
             case .timesheet:
                 TimesheetView()
             case .export:
-                ExportPlaceholderView()
+                ExportView()
             case nil:
                 Text("Select an item from the sidebar")
                     .foregroundStyle(.secondary)
             }
         }
         .frame(minWidth: 700, minHeight: 500)
+        .onReceive(NotificationCenter.default.publisher(for: .exportTimesheet)) { _ in
+            selectedTab = .export
+        }
     }
 }
 
