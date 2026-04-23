@@ -20,7 +20,7 @@ struct ContentView: View {
             case .settings:
                 SettingsView()
             case .timesheet:
-                TimesheetPlaceholderView()
+                TimesheetView()
             case .export:
                 ExportPlaceholderView()
             case nil:
