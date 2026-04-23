@@ -1,0 +1,9 @@
+project:
+  name: timesheet_generator
+  description: ''
+  type: ''
+  locale: '{{LOCALE}}'
+  created_at: '2026-04-22T15:24:46.133592Z'
+  initialized: 'true'
+github:
+  profile_name: ''
